@@ -54,7 +54,7 @@ if os.path.isfile(search_path):
         print("Invalid option. Case-sensitive counting active.")
         search_word = counter_word
         
-    word_count = file_txt.count(counter_word)
+    word_count = file_txt.count(search_word)
     
     msg_result = "The word " + og_counter_word + " was found " + str(word_count) + " times in this file: " + search_path
     print(msg_result)
@@ -71,23 +71,30 @@ elif  os.path.isdir(search_path):
     elif sensitivity_pref != "n":
         print("Invalid option. Case-sensitive counting active.")
     
+    # loop through each file in the directory
     for file_name in file_list: 
         file_path = search_path + "/" + file_name 
         
+        # only process if item is a file
         if os.path.isfile(file_path):
             with open(file_path, mode="r") as file_obj:
                 file_txt = file_obj.read()
                 
             search_word = counter_word
             
+            # adjust text and word for case sensitivity
             if sensitivity_pref == "n": 
                 file_txt = file_txt.lower()
                 search_word = counter_word.lower()
+                
+            # count word in this file    
             word_count = file_txt.count(search_word) 
             
+            # create and print result message
             msg_result ="The word " + og_counter_word + " was found " + str(word_count) + " times in this file: " + file_name
             print(msg_result)
             
+            # store result message in list
             msg_results.append(msg_result)
             
             
